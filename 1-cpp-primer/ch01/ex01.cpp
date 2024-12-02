@@ -3,6 +3,7 @@
 int main()
 {
     // main() must return status code
-    // status code is `int` 
+    // status code is `int` type
+    // 0 means all ok, other means any error
     return 0;
 }
