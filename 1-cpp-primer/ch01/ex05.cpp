@@ -8,4 +8,5 @@ int main()
     std::cout << "Number1 is " << number1 << std::endl;
     std::cout << "Number2 is " << number2 << std::endl;
     std::cout << "Mulitply is " << number1 * number2 << std::endl;
+    return 0;
 }
