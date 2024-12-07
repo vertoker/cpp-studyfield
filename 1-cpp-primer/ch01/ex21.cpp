@@ -1,4 +1,5 @@
 #include <iostream>
+// i'm too lazy for use build systems
 #include "../include/Sales_item.h"
 
 int main()
