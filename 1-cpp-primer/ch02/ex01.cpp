@@ -13,6 +13,7 @@ int main()
 
     // integer types
     std::cout << "short: " << sizeof(short) << " bytes, " << sizeof(short) * 8 << " bits" << std::endl;
+    std::cout << "unsigned: " << sizeof(unsigned) << " bytes, " << sizeof(unsigned) * 8 << " bits" << std::endl;
     std::cout << "int: " << sizeof(int) << " bytes, " << sizeof(int) * 8 << " bits" << std::endl;
     std::cout << "long: " << sizeof(long) << " bytes, " << sizeof(long) * 8 << " bits" << std::endl;
     std::cout << "long long: " << sizeof(long long) << " bytes, " << sizeof(long long) * 8 << " bits" << std::endl;
@@ -23,4 +24,5 @@ int main()
     std::cout << "long double: " << sizeof(long double) << " bytes, " << sizeof(long double) * 8 << " bits" << std::endl;
 
     // `void` means nothing, then it has no size (in computer meaning)
+    return 0;
 }
