@@ -30,7 +30,6 @@ int main()
     int************************* pppppppppppppppppppppppppi = &ppppppppppppppppppppppppi;
     int************************** ppppppppppppppppppppppppppi = &pppppppppppppppppppppppppi;
   //int*how*tf*does*it*even*exist* pppppppppppppppppppppppppppi = &ppppppppppppppppppppppppppi;
-    
     std::cout << **************************ppppppppppppppppppppppppppi << std::endl; // 42
     return 0;
 }
