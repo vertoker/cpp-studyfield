@@ -1,4 +1,7 @@
 // Based on https://en.cppreference.com/w/cpp/language/rule_of_three
+// Also must read https://habr.com/ru/articles/568306/
+// https://targem.ru/job/wp-content/uploads/task-2-1.txt
+// https://en.cppreference.com/w/cpp/utility/exchange
 
 #ifndef VERTOKER_STRING_H
 #define VERTOKER_STRING_H
