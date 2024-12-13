@@ -1,10 +1,10 @@
 #include <string>
 
-struct Foo {
+struct Sales_data {
     std::string bookNo;
-    unsigned unitsSold = 0;
-    double revenue = 0.0;
-};
+    unsigned unitsSold;
+    double revenue;
+} data1, data2, *data3; // why I can do this
 
 int main()
 {
