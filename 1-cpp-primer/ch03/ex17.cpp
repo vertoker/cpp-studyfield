@@ -10,11 +10,14 @@ int main()
     while (std::cin >> input)
         v.push_back(input);
     
-    std::cout << v.size() << std::endl;
-    for (size_t i = 0; i < v.size(); ++i)
+    for (auto& s : v)
+        for (auto& c : s)
+            c = toupper(c);
+    
+    for (size_t i = 0; i != v.size(); ++i)
     {
-        std::cout << "hhhh " << i << std::endl;
-        std::cout << v.at(0) << " " << std::endl;
+        if (i != 0 && i % 8 == 0) std::cout << std::endl;
+        std::cout << v[i] << " ";
     }
     std::cout << std::endl;
 
