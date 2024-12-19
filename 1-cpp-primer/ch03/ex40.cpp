@@ -5,7 +5,8 @@ int main()
 {
     const char* s1 = "first";
     const char* s2 = "second";
-    char* s = "                                  s";
+    char buf[100];
+    char* s = buf;
 
     strcpy(s, s1);
     strcat(s, s2);
