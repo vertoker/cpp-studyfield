@@ -13,6 +13,7 @@ struct Sales_data
     Sales_data(const std::string& bookNo) : bookNo(bookNo) { }
     Sales_data(const std::string& bookNo, const unsigned units_sold, const double revenue) 
         : bookNo(bookNo), units_sold(units_sold), revenue(revenue) { }
+    Sales_data(std::istream& is) { read(is, *this); }
 
     Sales_data& combine(const Sales_data& other);
 };
