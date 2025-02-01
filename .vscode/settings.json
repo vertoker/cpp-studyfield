@@ -108,6 +108,8 @@
     "text_encoding": "cpp",
     "typeinfo": "cpp",
     "variant": "cpp",
-    "bitset": "cpp"
+    "bitset": "cpp",
+    "fstream": "cpp",
+    "sstream": "cpp"
   }
 }
