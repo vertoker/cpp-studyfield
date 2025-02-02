@@ -110,6 +110,8 @@
     "variant": "cpp",
     "bitset": "cpp",
     "fstream": "cpp",
-    "sstream": "cpp"
+    "sstream": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp"
   }
 }
