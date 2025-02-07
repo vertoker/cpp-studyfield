@@ -116,6 +116,7 @@
     "map": "cpp",
     "set": "cpp",
     "unordered_set": "cpp",
-    "cstring": "cpp"
+    "cstring": "cpp",
+    "typeindex": "cpp"
   }
 }
