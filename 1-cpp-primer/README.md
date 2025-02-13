@@ -12,4 +12,5 @@ My target is study myself, therefore me and you doesn't need full explanation
 
 Read this book by yourself, create same repository for yourself
 
-(do not use others answers, this is study process, not I rewriting)
+(do not blindly copy other answers, this is study process)
+
