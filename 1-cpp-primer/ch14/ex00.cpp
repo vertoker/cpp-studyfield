@@ -1,71 +1,140 @@
 #include "stdint.h"
+#include <cstdio>
+#include <cstdlib>
+#include <new>
 
-class Example
+// https://en.cppreference.com/w/cpp/language/operators
+class Operators
 {
     int i;
 public:
-    Example() : Example(0) { }
-    Example(int i) : i{i} { }
+    Operators() : Operators(0) { }
+    Operators(int i) : i{i} { }
+
+    Operators(const Operators& other)
+    {
+        i = other.i;
+    }
+    Operators(Operators&& other)
+    {
+        i = other.i;
+        other.i = 0;
+    }
 
     // Operators
-    Example operator+(const Example& other) { return Example(i + other.i); }
-    Example operator-(const Example& other) { return Example(i - other.i); }
-    Example operator*(const Example& other) { return Example(i * other.i); }
-    Example operator/(const Example& other) { return Example(i / other.i); }
+    Operators operator+(const Operators& other) { return Operators(i + other.i); }
+    Operators operator-(const Operators& other) { return Operators(i - other.i); }
+    Operators operator*(const Operators& other) { return Operators(i * other.i); }
+    Operators operator/(const Operators& other) { return Operators(i / other.i); }
     
-    Example operator%(const Example& other) { return Example(i % other.i); }
-    Example operator^(const Example& other) { return Example(i ^ other.i); }
+    Operators operator%(const Operators& other) { return Operators(i % other.i); }
+    Operators operator^(const Operators& other) { return Operators(i ^ other.i); }
     
-    Example operator&(const Example& other) { return Example(i & other.i); }
-    Example operator|(const Example& other) { return Example(i | other.i); }
-    Example operator&&(const Example& other) { return Example(i && other.i); }
-    Example operator||(const Example& other) { return Example(i || other.i); }
+    Operators operator&(const Operators& other) { return Operators(i & other.i); }
+    Operators operator|(const Operators& other) { return Operators(i | other.i); }
+    Operators operator&&(const Operators& other) { return Operators(i && other.i); }
+    Operators operator||(const Operators& other) { return Operators(i || other.i); }
     
-    Example operator~() { return Example(~i); }
-    Example operator!() { return Example(!i); }
+    Operators operator~() { return Operators(~i); }
+    Operators operator!() { return Operators(!i); }
 
-    bool operator<(const Example& other) { return i < other.i; }
-    bool operator<=(const Example& other) { return i <= other.i; }
-    bool operator>(const Example& other) { return i > other.i; }
-    bool operator>=(const Example& other) { return i >= other.i; }
+    bool operator<(const Operators& other) { return i < other.i; }
+    bool operator<=(const Operators& other) { return i <= other.i; }
+    bool operator>(const Operators& other) { return i > other.i; }
+    bool operator>=(const Operators& other) { return i >= other.i; }
 
-    Example& operator++() { ++i; return *this; } // prefix
-    Example operator++(int) { Example tmp = *this; ++(*this); return tmp; } // postfix
-    Example& operator--() { --i; return *this; } // prefix
-    Example operator--(int) { Example tmp = *this; --(*this); return tmp; } // postfix
+    bool operator<<(const Operators& other) { return i << other.i; }
+    bool operator>>(const Operators& other) { return i >> other.i; }
+    bool operator==(const Operators& other) { return i == other.i; }
+    bool operator!=(const Operators& other) { return i != other.i; }
+
+    Operators& operator++()
+    {
+        ++i;
+        return *this;
+    }
+    Operators operator++(int)
+    {
+        Operators tmp = *this;
+        operator++();
+        return tmp;
+    }
+    Operators& operator--()
+    {
+        --i;
+        return *this;
+    }
+    Operators operator--(int)
+    {
+        Operators tmp = operator*();
+        operator--();
+        return tmp;
+    }
     
-    Example& operator+=(const Example& other) { i += other.i; return *this; }
-    Example& operator-=(const Example& other) { i -= other.i; return *this; }
-    Example& operator*=(const Example& other) { i *= other.i; return *this; }
-    Example& operator/=(const Example& other) { i /= other.i; return *this; }
+    Operators& operator+=(const Operators& other) { i += other.i; return *this; }
+    Operators& operator-=(const Operators& other) { i -= other.i; return *this; }
+    Operators& operator*=(const Operators& other) { i *= other.i; return *this; }
+    Operators& operator/=(const Operators& other) { i /= other.i; return *this; }
     
-    Example& operator%=(const Example& other) { i %= other.i; return *this; }
-    Example& operator^=(const Example& other) { i ^= other.i; return *this; }
+    Operators& operator%=(const Operators& other) { i %= other.i; return *this; }
+    Operators& operator^=(const Operators& other) { i ^= other.i; return *this; }
 
-    Example& operator&=(const Example& other) { i &= other.i; return *this; }
-    Example& operator|=(const Example& other) { i |= other.i; return *this; }
+    Operators& operator&=(const Operators& other) { i &= other.i; return *this; }
+    Operators& operator|=(const Operators& other) { i |= other.i; return *this; }
 
-    Example& operator<<=(const Example& other) { i <<= other.i; return *this; }
-    Example& operator>>=(const Example& other) { i >>= other.i; return *this; }
+    Operators& operator<<=(const Operators& other) { i <<= other.i; return *this; }
+    Operators& operator>>=(const Operators& other) { i >>= other.i; return *this; }
 
-    Example& operator[](const size_t& bit_index) { i >>= other.i; return *this; }
-    Example& operator()(const size_t& bit_index) { i >>= other.i; return *this; }
+    Operators& operator[](const size_t& bit_index) { return *this; }
+    Operators& operator()(const size_t& bit_index) { return *this; }
 
-    Example& operator->() { return *this; }
-    Example& operator->*() { return *this; }
+    // https://en.cppreference.com/w/cpp/language/operator_member_access 
+    Operators& operator*() { return *this; }
+    Operators* operator&() { return this; }
+    Operators& operator->() { return *this; }
 
-    void* operator new(size_t count) { return *this; }
-    void* operator new[](size_t count) { return *this; }
-    void operator delete(void* ptr) { return *this; }
-    void operator delete[](void* ptr) { return *this; }
+    // https://en.cppreference.com/w/cpp/memory/new/operator_new
+    void* operator new(size_t size)
+    {
+        if (size == 0) ++size;
 
-    bool operator<<(const Example& other) { return i << other.i; }
-    bool operator>>(const Example& other) { return i >> other.i; }
+        void* ptr = std::malloc(size);
+        if (ptr) return ptr;
+        
+        throw std::bad_alloc{};
+    }
+    void* operator new[](size_t size)
+    {
+        if (size == 0) ++size;
 
-    bool operator==(const Example& other) { return i == other.i; }
-    bool operator!=(const Example& other) { return i != other.i; }
+        void* ptr = std::malloc(size);
+        if (ptr) return ptr;
+        
+        throw std::bad_alloc{};
+    }
+    void operator delete(void* ptr) { std::free(ptr); }
+    void operator delete[](void* ptr) { std::free(ptr); }
 
-    Example& operator=(const Example& other) { return Example(!i); }
+    Operators& operator=(const Operators& other)
+    {
+        if (this == &other) return *this;
+        i = other.i;
+        return *this;
+    }
+    Operators& operator=(Operators&& other) noexcept
+    {
+        if (this == &other) return *this;
+        i = other.i;
+        other.i = 0;
+        return *this;
+    }
+    Operators& operator=(Operators other) noexcept
+    {
+        if (this == &other) return *this;
+        i = other.i;
+        other.i = 0;
+        return *this;
+    }
 
-    Example operator,() { return Example(!i); }
+    int operator,(int& b) { return i; }
 };
