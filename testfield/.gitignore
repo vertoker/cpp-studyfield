@@ -1,0 +1,10 @@
+
+# Build folder[s]
+[Bb]uild/
+[Bb]uilds/
+[Oo]ut/
+
+# IDE meta files
+/.vs
+/.vscode
+.idea/
