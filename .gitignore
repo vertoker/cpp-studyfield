@@ -6,3 +6,7 @@
 # Build files
 *.exe
 *.o
+
+# IDE folders
+.vscode/
+.vs/
