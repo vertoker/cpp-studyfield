@@ -11,7 +11,7 @@ class Z : public X, public Y {};
 class MI : public C, public Z {};
 class D : public X, public C{};
 
-// In order A, B, C, X, Y, Z, MI, D or apeearance order
+// In order A, B, C, X, Y, Z, MI, D or appearance order
 
 MI mi;
 
