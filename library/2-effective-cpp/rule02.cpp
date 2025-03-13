@@ -1,3 +1,4 @@
+// 2. Prefer consts, enums, and inlines to #defines
 
 // Why `const`, `enum` and `inline` more preferred than `#define` 
 

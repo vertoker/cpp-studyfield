@@ -1,3 +1,5 @@
+// 3. Use const whenever possible
+
 #include <string>
 #include <cassert>
 #include <iostream>
@@ -17,7 +19,7 @@ public:
     }
     char& operator[](std::size_t pos) const
     {
-        return const_cast<char&>(static_cast<const TextBlock&>(*this)[pos]);
+        return const_cast<char&>(static_cast<const TextBlock&>(*this)[pos]); // operator no duplicate
     }
 
 private:

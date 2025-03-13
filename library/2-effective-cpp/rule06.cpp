@@ -1,3 +1,5 @@
+// 6. Explicitly disallow the use of compiler-generated functions you do not want
+
 #include <iostream>
 
 class Data1

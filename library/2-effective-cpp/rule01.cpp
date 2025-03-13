@@ -1,4 +1,4 @@
-// Different era's of C++
+// 1. View C++ as a federation of languages
 
 // Era 1: Clear C
 #include <stdio.h>

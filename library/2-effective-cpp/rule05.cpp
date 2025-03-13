@@ -1,5 +1,6 @@
+// 5. Know what functions C++ silently writes and calls
 
-// This classes are identical
+// Next classes are identical
 
 class Empty1 {};
 
