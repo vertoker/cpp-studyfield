@@ -1,0 +1,1 @@
+clang++ -include-pch build/stdafx.h.pch main.cpp -o build/main.exe
