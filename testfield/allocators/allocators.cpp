@@ -46,11 +46,11 @@ private:
 
     void deleter()
     {
-        std::cout << "counter:" << *counter << std::endl;
+        //std::cout << "counter:" << *counter << std::endl;
         (*counter)--;
         if (*counter == 0)
         {
-            std::cout << "counter2:" << *counter << std::endl;
+            //std::cout << "counter2:" << *counter << std::endl;
             operator delete(start);
             operator delete(counter);
         }
@@ -58,6 +58,17 @@ private:
 
 public:
     using value_type = T;
+    using pointer = value_type*;
+    using const_pointer = const value_type*;
+    using reference = value_type&;
+    using const_reference = const value_type&;
+    using size_type = size_t;
+    using difference_type = ptrdiff_t;
+
+    inline size_t getSize() const noexcept { return size; }
+    inline char* getStart() const noexcept { return start; }
+    inline char* getCurrent() const noexcept { return current; }
+    inline int* getCounter() const noexcept { return counter; }
 
     ArenaAllocator(size_t bytes = 1024 * 1024) : size(bytes), 
         start(static_cast<char*>(operator new(bytes))),
@@ -70,42 +81,39 @@ public:
 
     ArenaAllocator(const ArenaAllocator& other)
     {
-        std::cout << "cp ctor" << std::endl;
-        this->start = other.start;
-        this->current = other.current;
-        this->size = other.size;
-        this->counter = other.counter;
+        //std::cout << "cp ctor" << std::endl;
+        start = other.start;
+        current = other.current;
+        size = other.size;
+        counter = other.counter;
         ++(*this->counter);
     }
-    ArenaAllocator(ArenaAllocator&& other)
+    template <typename U>
+    ArenaAllocator(const ArenaAllocator<U>& other)
     {
-        std::cout << "mv ctor" << std::endl;
-        this->start = other.start;
-        this->current = other.current;
-        this->size = other.size;
-        this->counter = other.counter;
-        other.start = nullptr;
-        other.current = nullptr;
-        other.size = 0;
-        other.counter = nullptr;
+        //std::cout << "cp U ctor" << std::endl;
+        start = other.getStart();
+        current = other.getCurrent();
+        size = other.getSize();
+        counter = other.getCounter();
+        ++(*this->counter);
     }
 
     T* allocate(size_t n)
     {
-        // TODO разобраться с этим завтра
         size_t bytes = n * sizeof(T);
         auto returnMemory = current;
         current += bytes;
 
         if (current - start > size)
         {
-            std::cout << "Error with bad_alloc: current:" << (current - start) << ", size:" << size << std::endl;
+            std::cout << "Error with bad_alloc: current:" << (current - start) << ", bytes:" << bytes << ", size:" << size << std::endl;
             throw std::bad_alloc();
         }
-        std::cout << "current:" << (current - start) << ", bytes:" << bytes <<  ", size:" << size << std::endl;
+        //std::cout << "current:" << (current - start) << ", bytes:" << bytes <<  ", size:" << size << std::endl;
         return reinterpret_cast<T*>(returnMemory);
     }
-    void deallocate(T* ptr, size_t n) {}
+    void deallocate(pointer ptr, size_t n) {}
 
     void printStatus()
     {

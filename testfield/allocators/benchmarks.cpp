@@ -11,20 +11,18 @@ int main()
 {
     const size_t N = 10'000'000;
 
-    //while (true)
+    while (true)
     {
         auto start = std::chrono::high_resolution_clock::now();
 
         {
-            //std::vector<int> vec; // 1100 ms
-            //std::vector<int, Allocator<int>> vec; // 1100 ms
-            ArenaAllocator<int> alloc(1024 * 1024 * 400);
-            std::vector<int, ArenaAllocator<int>> vec {alloc}; // 250-280 ms
+            //std::list<int> list; // 1130 ms
+            //std::list<int, Allocator<int>> list; // 1130 ms
+            ArenaAllocator<int> alloc(1024 * 1024 * 1024);
+            std::list<int, ArenaAllocator<int>> list(alloc); // 380 ms
         
             for (size_t i = 0; i < N; i++)
-                vec.emplace_back(i);
-            
-            alloc.printStatus();
+                list.emplace_back(i);
         }
 
         auto end = std::chrono::high_resolution_clock::now();
