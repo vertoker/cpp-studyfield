@@ -47,8 +47,7 @@ private:
     void deleter()
     {
         //std::cout << "counter:" << *counter << std::endl;
-        (*counter)--;
-        if (*counter == 0)
+        if (counter != nullptr && --(*counter) == 0)
         {
             //std::cout << "counter2:" << *counter << std::endl;
             operator delete(start);
@@ -64,6 +63,10 @@ public:
     using const_reference = const value_type&;
     using size_type = size_t;
     using difference_type = ptrdiff_t;
+
+    using propagate_on_container_copy_assignment = std::true_type;
+    using propagate_on_container_move_assignment = std::false_type;
+    using propagate_on_container_swap = std::false_type;
 
     inline size_t getSize() const noexcept { return size; }
     inline char* getStart() const noexcept { return start; }
@@ -86,7 +89,7 @@ public:
         current = other.current;
         size = other.size;
         counter = other.counter;
-        ++(*this->counter);
+        ++(*counter);
     }
     template <typename U>
     ArenaAllocator(const ArenaAllocator<U>& other)
@@ -96,7 +99,28 @@ public:
         current = other.getCurrent();
         size = other.getSize();
         counter = other.getCounter();
-        ++(*this->counter);
+        ++(*counter);
+    }
+    ArenaAllocator operator=(const ArenaAllocator& other)
+    {
+        if (&other == this) return *this;
+
+        deleter();
+
+        start = other.start;
+        current = other.current;
+        size = other.size;
+        
+        counter = other.counter;
+        ++(*counter);
+
+        return *this;
+    }
+
+    ArenaAllocator select_on_container_copy_construction() const // for copy
+    {
+        std::cout << "select_on_container_copy_construction" << std::endl;
+        return ArenaAllocator();
     }
 
     T* allocate(size_t n)
@@ -118,5 +142,17 @@ public:
     void printStatus()
     {
         std::cout << "current:" << (current - start) << ", size:" << size << std::endl;
+    }
+
+    template <class U>
+    bool operator==(const ArenaAllocator<U>& other) noexcept
+    {
+        std::cout << "operator==" << std::endl;
+        return start == other.start;
+    }
+    template <class U>
+    bool operator!=(const ArenaAllocator<U>& other) noexcept
+    {
+        return !(*this == other);
     }
 };
