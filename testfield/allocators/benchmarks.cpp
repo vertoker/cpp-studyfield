@@ -18,11 +18,15 @@ int main()
         {
             //std::list<int> list; // 1130 ms
             //std::list<int, Allocator<int>> list; // 1130 ms
+            
             ArenaAllocator<int> alloc(1024 * 1024 * 1024);
-            std::list<int, ArenaAllocator<int>> list(alloc); // 380 ms
+            //std::list<int, ArenaAllocator<int>> list(alloc); // 380 ms
+            std::vector<int, ArenaAllocator<int>> vec(alloc); // 100 ms
+            vec.reserve(N); // 95 ms
         
             for (size_t i = 0; i < N; i++)
-                list.emplace_back(i);
+                //list.emplace_back(i);
+                vec.emplace_back(i);
         }
 
         auto end = std::chrono::high_resolution_clock::now();
