@@ -10,27 +10,27 @@
 class Graph
 {
 public:
-    typedef size_t NodeIndex;
-    typedef std::unordered_set<NodeIndex> Links;
-    typedef std::unordered_map<NodeIndex, Links> Nodes;
+    typedef size_t Node;
+    typedef std::unordered_set<Node> Links;
+    typedef std::unordered_map<Node, Links> Nodes;
 
     inline const Nodes& getNodes() const noexcept { return nodes; }
-    inline const Links& getLinks(NodeIndex node) const { return nodes.at(node); }
+    inline const Links& getLinks(Node node) const { return nodes.at(node); }
 
-    NodeIndex addNode();
-    bool removeNode(const NodeIndex node);
-    bool containsNode(const NodeIndex node) const;
+    Node addNode();
+    bool removeNode(const Node node);
+    bool containsNode(const Node node) const;
 
-    bool addLink(const NodeIndex node1, const NodeIndex node2);
-    bool removeLink(const NodeIndex node1, const NodeIndex node2);
-    bool addLinkDirected(const NodeIndex node1, const NodeIndex node2);
-    bool removeLinkDirected(const NodeIndex node1, const NodeIndex node2);
+    bool addLink(const Node node1, const Node node2);
+    bool removeLink(const Node node1, const Node node2);
+    bool addLinkDirected(const Node node1, const Node node2);
+    bool removeLinkDirected(const Node node1, const Node node2);
     
-    bool containsLink(const NodeIndex node1, const NodeIndex node2) const;
+    bool containsLink(const Node node1, const Node node2) const;
 
 private:
     Nodes nodes;
-    NodeIndex nodesCounter = 0;
+    Node nodesCounter = 0;
 };
 
 void printState(const Graph& graph);

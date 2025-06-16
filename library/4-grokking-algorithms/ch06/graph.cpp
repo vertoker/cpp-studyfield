@@ -1,11 +1,11 @@
 #include "graph.hpp"
 
-Graph::NodeIndex Graph::addNode()
+Graph::Node Graph::addNode()
 {
     nodes.insert_or_assign(++nodesCounter, Links());
     return nodesCounter;
 }
-bool Graph::removeNode(const NodeIndex node)
+bool Graph::removeNode(const Node node)
 {
     auto iter = nodes.find(node);
     if (iter == nodes.end()) return false;
@@ -15,35 +15,35 @@ bool Graph::removeNode(const NodeIndex node)
     
     return true;
 }
-bool Graph::containsNode(NodeIndex node) const
+bool Graph::containsNode(Node node) const
 {
     return nodes.count(node) == 1;
 }
 
-bool Graph::addLink(const NodeIndex node1, const NodeIndex node2)
+bool Graph::addLink(const Node node1, const Node node2)
 {
     nodes.at(node1).insert(node2);
     nodes.at(node2).insert(node1);
     return true;
 }
-bool Graph::removeLink(const NodeIndex node1, const NodeIndex node2)
+bool Graph::removeLink(const Node node1, const Node node2)
 {
     nodes.at(node1).erase(node2);
     nodes.at(node2).erase(node1);
     return true;
 }
-bool Graph::addLinkDirected(const NodeIndex node1, const NodeIndex node2)
+bool Graph::addLinkDirected(const Node node1, const Node node2)
 {
     nodes.at(node1).insert(node2);
     return true;
 }
-bool Graph::removeLinkDirected(const NodeIndex node1, const NodeIndex node2)
+bool Graph::removeLinkDirected(const Node node1, const Node node2)
 {
     nodes.at(node1).erase(node2);
     return true;
 }
 
-bool Graph::containsLink(const NodeIndex node1, const NodeIndex node2) const
+bool Graph::containsLink(const Node node1, const Node node2) const
 {
     return nodes.at(node1).count(node2) == 1;
 }
