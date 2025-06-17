@@ -4,6 +4,7 @@
 
 // BFS - Breadth First Search
 // Without traced path, too complicated for me, DFS is much simpler in that
+// https://stackoverflow.com/questions/62803211/how-to-reconstruct-paths-using-bfs
 
 bool bfsRecursive(const Graph& graph, Graph::Node targetNode, 
     std::unordered_set<Graph::Node>& visited, std::queue<Graph::Node>& queue)

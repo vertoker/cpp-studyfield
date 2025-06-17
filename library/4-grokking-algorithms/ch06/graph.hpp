@@ -36,3 +36,4 @@ private:
 void printState(const Graph& graph);
 Graph createExample1();
 Graph createExample2();
+Graph createExample3();

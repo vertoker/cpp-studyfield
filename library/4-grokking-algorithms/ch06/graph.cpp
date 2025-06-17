@@ -95,3 +95,24 @@ Graph createExample2()
     graph.addLinkDirected(node6, node7);
     return graph;
 }
+Graph createExample3()
+{
+    Graph graph;
+    auto node1 = graph.addNode();
+    auto node2 = graph.addNode();
+    auto node3 = graph.addNode();
+    auto node4 = graph.addNode();
+    auto node5 = graph.addNode();
+    auto node6 = graph.addNode();
+    auto node7 = graph.addNode();
+
+    graph.addLink(node1, node2);
+    graph.addLink(node2, node3);
+    graph.addLink(node1, node4);
+    graph.addLink(node4, node3);
+    graph.addLink(node4, node5);
+    graph.addLink(node4, node6);
+    graph.addLink(node6, node5);
+    graph.addLink(node6, node7);
+    return graph;
+}
