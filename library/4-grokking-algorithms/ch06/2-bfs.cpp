@@ -2,42 +2,41 @@
 #include "graph.hpp"
 #include <queue>
 
-// BFS - Breadth First Search (TODO)
+// BFS - Breadth First Search
+// Without traced path, too complicated for me, DFS is much simpler in that
 
-bool bfsRecursive(const Graph& graph, Graph::Node currentNode, Graph::Node targetNode, 
-    std::unordered_set<Graph::Node>& visited, std::queue<Graph::Node>& queue, std::vector<Graph::Node>& result)
+bool bfsRecursive(const Graph& graph, Graph::Node targetNode, 
+    std::unordered_set<Graph::Node>& visited, std::queue<Graph::Node>& queue)
 {
-    auto size = queue.size();
-    for (size_t i = 0; i < size; i++)
+    auto counter = queue.size();
+    while (counter != 0)
     {
         auto node = queue.front();
         queue.pop();
 
-        for (const auto& linkedNode : graph.getLinks(currentNode))
+        if (node == targetNode) return true;
+        
+        for (const auto& linkedNode : graph.getLinks(node))
         {
             if (visited.count(linkedNode) == 1) continue;
-            if (bfsRecursive(graph, linkedNode, targetNode, visited, queue, result))
-                return true;
             queue.push(linkedNode);
+            visited.insert(linkedNode);
         }
+
+        --counter;
     }
-    
-    result.pop_back();
-    return false;
+
+    return queue.size() != 0 && bfsRecursive(graph, targetNode, visited, queue);
 }
 
-std::vector<Graph::Node> bfs(const Graph& graph, Graph::Node startNode, Graph::Node targetNode)
+bool bfs(const Graph& graph, Graph::Node startNode, Graph::Node targetNode)
 {
     std::unordered_set<Graph::Node> visited;
     std::queue<Graph::Node> queue;
-    std::vector<Graph::Node> result;
 
     queue.push(startNode);
-    result.emplace_back(startNode);
-
-    bfsRecursive(graph, startNode, targetNode, visited, queue, result);
-    //result.clear();
-    return result;
+    visited.insert(startNode);
+    return bfsRecursive(graph, targetNode, visited, queue);
 }
 
 int main()
@@ -45,21 +44,14 @@ int main()
     auto graph = createExample2();
     printState(graph);
 
-    auto path1 = bfs(graph, 1, 7);
-    for (auto &&i : path1)
-        std::cout << i << ' ';
-    std::cout << std::endl;
-
-    auto path2 = bfs(graph, 7, 1);
-    for (auto &&i : path2)
-        std::cout << i << ' ';
-    std::cout << std::endl;
-
-    auto path3 = bfs(graph, 4, 3);
-    for (auto &&i : path3)
-        std::cout << i << ' ';
-    std::cout << std::endl;
+    auto has1 = bfs(graph, 1, 7);
+    auto has2 = bfs(graph, 7, 1);
+    auto has3 = bfs(graph, 4, 3);
     
-    
+    std::cout << std::boolalpha;
+    std::cout << has1 << ' ';
+    std::cout << has2 << ' ';
+    std::cout << has3 << ' ';
+
     return 0;
 }
