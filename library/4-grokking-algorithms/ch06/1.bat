@@ -1,2 +1,2 @@
-g++ 1-dfs.cpp graph.hpp graph.cpp
+g++ 1-dfs.cpp ../common/graph.hpp ../common/graph.cpp
 a.exe

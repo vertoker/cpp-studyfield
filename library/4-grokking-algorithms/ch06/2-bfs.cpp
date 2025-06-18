@@ -1,5 +1,4 @@
-#include <iostream>
-#include "graph.hpp"
+#include "../common/graph.hpp"
 #include <queue>
 
 // BFS - Breadth First Search
