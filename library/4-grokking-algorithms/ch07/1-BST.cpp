@@ -35,6 +35,13 @@ NodePtr search(NodePtr node, int value)
         ? search(node->left, value)
         : search(node->right, value);
 }
+void inverse(NodePtr node)
+{
+    if (!node) return;
+    inverse(node->left);
+    inverse(node->right);
+    std::swap(node->left, node->right);
+}
 
 void insert(NodePtr node, int value)
 {
@@ -197,6 +204,9 @@ int main()
     root = erase(root, 5);
     levelOrderPrint2(root);
     std::cout << std::endl;
+
+    inverse(root);
+    levelOrderPrint2(root);
 
     return 0;
 }
