@@ -7,22 +7,13 @@ typedef std::shared_ptr<Node> NodePtr;
 
 struct Node
 {
-    size_t value;
+    int value;
     NodePtr left = nullptr;
     NodePtr right = nullptr;
 
-    Node(size_t value) : value{value} { }
+    Node(int value) : value{value} { }
 };
 
-NodePtr search(NodePtr node, size_t value)
-{
-    if (!node) return nullptr;
-    if (node->value == value) return node; // match
-
-    return value < node->value // go deeper search
-        ? search(node->left, value)
-        : search(node->right, value);
-}
 NodePtr getMin(NodePtr node)
 {
     if (!node) return nullptr;
@@ -35,8 +26,17 @@ NodePtr getMax(NodePtr node)
     if (!node->right) return node;
     return getMax(node->right);
 }
+NodePtr search(NodePtr node, int value)
+{
+    if (!node) return nullptr;
+    if (node->value == value) return node; // match
 
-void insert(NodePtr node, size_t value)
+    return value < node->value // go deeper search
+        ? search(node->left, value)
+        : search(node->right, value);
+}
+
+void insert(NodePtr node, int value)
 {
     if (value < node->value) // for left case
     {
@@ -51,7 +51,7 @@ void insert(NodePtr node, size_t value)
         else node->right = std::make_shared<Node>(value);
     }
 }
-NodePtr erase(NodePtr node, size_t value)
+NodePtr erase(NodePtr node, int value)
 {
     if (!node) return nullptr; // for no valid
     // searching until node founded
@@ -194,7 +194,7 @@ int main()
     levelOrderPrint2(root);
     std::cout << std::endl;
 
-    erase(root, 5);
+    root = erase(root, 5);
     levelOrderPrint2(root);
     std::cout << std::endl;
 
