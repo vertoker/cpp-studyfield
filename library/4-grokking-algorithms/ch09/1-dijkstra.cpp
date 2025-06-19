@@ -65,6 +65,13 @@ std::vector<node> dijkstra(const WGraph& weightedGraph, node startNode, node end
     return path;
 }
 
+void print(const std::vector<node>& path)
+{
+    for (const auto& i : path)
+        std::cout << i << ' ';
+    std::cout << std::endl;
+}
+
 int main()
 {
     WGraph weightedGraph = {
@@ -73,12 +80,17 @@ int main()
         {{3, 1}, {5, 3}}, // 2-C
         {} // 3-D
     };
-
     auto path = dijkstra(weightedGraph, 0, 3);
-
-    for (auto &&i : path)
-        std::cout << i << ' ';
-    std::cout << std::endl;
+    print(path);
     
+    WGraph weightedGraph2 = {
+        {{5, 1}, {0, 2}}, // 0-A
+        {{7, 2}}, // 1-B
+        {{35, 3}}, // 2-C
+        {} // 3-D
+    };
+    auto path2 = dijkstra(weightedGraph2, 0, 3);
+    print(path2);
+
     return 0;
 }
